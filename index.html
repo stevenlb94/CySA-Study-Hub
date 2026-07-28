@@ -1,44 +1,367 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Moved — CySA+ Study Hub is now part of EZ Exam</title>
-    <link rel="canonical" href="https://ez-exams.github.io/cysa/" />
-    <meta http-equiv="refresh" content="4; url=https://ez-exams.github.io/cysa/" />
-    <meta name="robots" content="noindex" />
-    <style>
-      :root { color-scheme: dark; }
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { min-height: 100vh; display: flex; align-items: center; justify-content: center;
-        background: #0f172a; color: #f8fafc; text-align: center; padding: 24px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-        line-height: 1.6; }
-      .box { max-width: 560px; }
-      h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -0.02em;
-        margin-bottom: 14px; }
-      .grad { background: linear-gradient(120deg, #818cf8, #38bdf8 55%, #34d399);
-        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-        color: transparent; }
-      p { color: #94a3b8; margin-bottom: 12px; }
-      .btn { display: inline-block; margin-top: 18px; padding: 13px 26px; border-radius: 10px;
-        background: #6366f1; color: #fff; font-weight: 700; text-decoration: none;
-        transition: filter 0.15s ease; }
-      .btn:hover { filter: brightness(1.12); }
-      .note { margin-top: 26px; font-size: 0.84rem; color: #64748b; }
-      code { background: #1e293b; padding: 2px 6px; border-radius: 5px; font-size: 0.85em; }
-    </style>
-  </head>
-  <body>
-    <div class="box">
-      <h1>This hub has <span class="grad">moved</span></h1>
-      <p>The CySA+ CS0-003 study hub now lives inside <strong>EZ Exam</strong>, alongside the
-         Security+ and AZ-900 hubs.</p>
-      <p>Redirecting you in a moment&hellip;</p>
-      <a class="btn" href="https://ez-exams.github.io/cysa/">Go to the CySA+ hub &rarr;</a>
-      <p class="note">This repository is retained only for history and is no longer updated.
-         The maintained source is <code>ez-exams/ez-exams.github.io</code>.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompTIA CySA+ CS0-003 Study Hub</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="assets/exam-mode.js" data-hub="cysa" defer></script>
+    <script>(function(){var h=location.hostname;if(h!=="ez-exams.github.io"&&h!=="localhost"&&h!=="127.0.0.1"){document.documentElement.setAttribute("data-ez-standalone","")}})();</script>
+    <style>[data-ez-standalone] .ez-nav-home,[data-ez-standalone] .ez-nav-div,[data-ez-standalone] .ez-nav-label{display:none!important}</style>
+</head>
+<body>
+    <nav class="ez-nav" aria-label="Site and section navigation">
+      <a class="ez-nav-home" href="../"><span class="ez-house" aria-hidden="true">⌂</span> Home</a>
+      <span class="ez-nav-div"></span>
+      <span class="ez-nav-label">Sections</span>
+      <div class="ez-nav-sections"><button class="ez-nav-btn is-active" data-go="__menu__">Hub menu</button><button class="ez-nav-btn" data-go="exam-setup">Practice Exam</button><button class="ez-nav-btn" data-go="pbq-setup">PBQ Exam</button><button class="ez-nav-btn" data-go="flashcard-setup">Flashcards</button><button class="ez-nav-btn" data-go="acronym-setup">Acronyms</button></div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>CompTIA CySA+ CS0-003 Study Hub</h1>
+            <p>Master the Cybersecurity Analyst certification</p>
+        </header>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen active">
+            <h2 style="text-align: center; margin-bottom: 0.5rem; color: var(--text-secondary); font-size: 1.1rem;">How do you want to study?</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-muted);">Pick a mode below. Everything is drawn from the CS0-003 question pool and the official CompTIA acronym list.</p>
+            
+            <div class="mode-grid">
+                <div class="mode-card" onclick="showScreen('exam-setup')">
+                    <div class="label">Test yourself</div>
+                    <h3>Practice Exam</h3>
+                    <p>A randomized multiple-choice quiz with instant feedback, scoring, and a missed-question review.</p>
+                </div>
+                
+                <div class="mode-card" onclick="showScreen('pbq-setup')">
+                    <div class="label">Simulations</div>
+                    <h3>PBQ Practice Exam</h3>
+                    <p>The performance-based questions — hotspots, log triage and configuration tables, graded with partial credit.</p>
+                </div>
+
+                <div class="mode-card" onclick="showScreen('flashcard-setup')">
+                    <div class="label">Drill the pool</div>
+                    <h3>Exam Flashcards</h3>
+                    <p>Flip through real questions from the exam pool — recall the answer, then reveal it and grade yourself.</p>
+                </div>
+                
+                <div class="mode-card" onclick="showScreen('acronym-setup')">
+                    <div class="label">Memorize fast</div>
+                    <h3>Acronym Flashcards</h3>
+                    <p>The full official CompTIA CS0-003 acronym list. Flip each card to see the meaning and definition.</p>
+                </div>
+            </div>
+            
+            <div id="loading-status" class="loading">
+                <div class="spinner"></div>
+                <span style="margin-left: 1rem;">Loading question bank…</span>
+            </div>
+            <div id="loaded-status" class="hidden" style="text-align: center; color: var(--text-muted);">
+                <span id="question-count">…</span> questions loaded • <span id="pbq-count">…</span> PBQs • <span id="acronym-count">…</span> acronyms loaded
+            </div>
+        </div>
+
+        <!-- Exam Setup Screen -->
+        <div id="exam-setup" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="setup-card">
+                <h2>Build your practice exam</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Choose how many questions you want, and we'll randomly draw them from the question pool.</p>
+                <div class="form-group">
+                    <label>Number of questions</label>
+                    <input type="number" id="exam-question-count" min="5" max="485" value="75">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="shuffle-choices" checked>
+                        <label for="shuffle-choices" style="margin: 0;">Shuffle answer choices within each question</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="startExam()">Start Exam</button>
+            </div>
+        </div>
+
+        <!-- Exam Screen -->
+        <div id="exam-screen" class="screen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="exam-progress" style="width: 0%"></div>
+            </div>
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number" id="current-question-num">Question 1 of 75</span>
+                    <span class="domain-badge d1" id="question-domain"></span>
+                </div>
+                <div class="question-text" id="question-text"></div>
+                <div class="choices" id="choices-container"></div>
+                <div class="feedback" id="feedback">
+                    <div class="feedback-title" id="feedback-title"></div>
+                    <div class="feedback-text" id="feedback-text"></div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <div class="nav-main">
+                    <button class="btn btn-secondary" id="submit-btn" onclick="submitAnswer()">Submit</button>
+                    <button class="btn btn-primary hidden" id="next-btn" onclick="nextQuestion()">Next question</button>
+                </div>
+                <button class="btn btn-end" onclick="showModal('exam')">End exam</button>
+            </div>
+        </div>
+
+        <!-- Exam Results Screen -->
+        <div id="exam-results" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="results-card">
+                <h2 style="margin-bottom: 1.5rem;" id="results-heading">Exam Complete</h2>
+                <div class="results-score" id="results-score">0%</div>
+                <div class="results-label">You got <span id="results-correct">0</span> of <span id="results-total">0</span> correct</div>
+                <div class="results-note hidden" id="results-note"></div>
+                <div class="results-stats">
+                    <div class="stat">
+                        <div class="stat-value correct" id="stat-correct">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value incorrect" id="stat-incorrect">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                </div>
+                <div class="section-breakdown" id="section-breakdown"></div>
+                <div class="results-actions" style="margin-top: 2rem;">
+                    <button class="btn btn-secondary" id="review-missed-btn" onclick="showMissedQuestions()">Review missed questions</button>
+                    <button class="btn btn-primary" onclick="showScreen('exam-setup')">Take a new exam</button>
+                </div>
+            </div>
+            <div id="missed-questions-container" class="hidden" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Missed Questions</h3>
+                <div class="missed-questions-list" id="missed-questions-list"></div>
+            </div>
+        </div>
+
+        <!-- PBQ Setup -->
+        <div id="pbq-setup" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="setup-card">
+                <h2>PBQ practice exam</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">These are the performance-based questions from the CS0-003 pool — the interactive simulations that open the real exam. Each one is graded per sub-answer, so partial credit counts.</p>
+                <div class="form-group">
+                    <label>Number of PBQs</label>
+                    <input type="number" id="pbq-question-count" min="1" max="8" value="8">
+                </div>
+                <div class="pbq-note">The source dump ships no official answer key for PBQs. Each answer here was derived from the simulation exhibits and community discussion, and every PBQ carries a confidence rating so you can see which keys are solid and which are judgement calls.</div>
+                <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="startPbq()">Start PBQ Exam</button>
+            </div>
+        </div>
+
+        <!-- PBQ Screen -->
+        <div id="pbq-screen" class="screen">
+            <div class="progress-bar"><div class="progress-fill" id="pbq-progress" style="width: 0%"></div></div>
+            <div class="pbq-card">
+                <div class="pbq-head">
+                    <div>
+                        <div class="question-number" id="pbq-counter">PBQ 1 of 8</div>
+                        <div class="pbq-title" id="pbq-title"></div>
+                    </div>
+                    <div class="pbq-meta">
+                        <span class="domain-badge d1" id="pbq-domain"></span>
+                        <span class="conf-chip medium" id="pbq-conf"></span>
+                    </div>
+                </div>
+                <div class="pbq-scenario" id="pbq-scenario"></div>
+                <div class="pbq-exhibits" id="pbq-exhibits"></div>
+                <div id="pbq-body"></div>
+                <div class="feedback" id="pbq-feedback">
+                    <div class="feedback-title" id="pbq-feedback-title"></div>
+                    <div class="feedback-text" id="pbq-feedback-text"></div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <div class="nav-main">
+                    <button class="btn btn-secondary" id="pbq-submit-btn" onclick="submitPbq()">Submit</button>
+                    <button class="btn btn-primary hidden" id="pbq-next-btn" onclick="nextPbq()">Next PBQ</button>
+                </div>
+                <button class="btn btn-end" onclick="showModal('pbq')">End exam</button>
+            </div>
+        </div>
+
+        <!-- PBQ Results -->
+        <div id="pbq-results" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="results-card">
+                <h2 style="margin-bottom: 1.5rem;" id="pbq-results-heading">PBQ Exam Complete</h2>
+                <div class="results-score" id="pbq-score">0%</div>
+                <div class="results-label">You scored <span id="pbq-correct">0</span> of <span id="pbq-total">0</span> sub-answers</div>
+                <div class="results-note hidden" id="pbq-results-note"></div>
+                <div class="results-stats">
+                    <div class="stat"><div class="stat-value correct" id="pbq-stat-full">0</div><div class="stat-label">Fully correct</div></div>
+                    <div class="stat"><div class="stat-value incorrect" id="pbq-stat-partial">0</div><div class="stat-label">Partial or missed</div></div>
+                </div>
+                <div class="section-breakdown"><h3>Score by PBQ</h3><div class="pbq-list" id="pbq-list"></div></div>
+                <div class="results-actions" style="margin-top: 2rem;">
+                    <button class="btn btn-secondary" onclick="showPbqReview()" id="pbq-review-btn">Review answers</button>
+                    <button class="btn btn-primary" onclick="showScreen('pbq-setup')">Take a new PBQ exam</button>
+                </div>
+            </div>
+            <div id="pbq-review-container" class="hidden" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">PBQ Review</h3>
+                <div id="pbq-review-list"></div>
+            </div>
+        </div>
+
+        <!-- Flashcard Setup Screen -->
+        <div id="flashcard-setup" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="setup-card">
+                <h2>Build your flashcard set</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Flip through exam questions and test your recall.</p>
+                <div class="form-group">
+                    <label>Number of cards</label>
+                    <input type="number" id="flashcard-count" min="5" max="485" value="30">
+                </div>
+                <button class="btn btn-primary" onclick="startFlashcards()">Start Studying</button>
+            </div>
+        </div>
+
+        <!-- Flashcard Screen -->
+        <div id="flashcard-screen" class="screen">
+            <a class="back-btn" onclick="showModal('flashcard')">‹ End session</a>
+            <div class="flashcard-counter" id="flashcard-counter">Card 1 of 30</div>
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard" onclick="flipCard()">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="flashcard-label">Question</div>
+                        <div class="flashcard-content flashcard-question" id="flashcard-question"></div>
+                        <div class="flashcard-hint">Tap the card or press Space to flip</div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="flashcard-label">Answer</div>
+                        <div class="flashcard-answer" id="flashcard-answer"></div>
+                        <div class="flashcard-choices" id="flashcard-choices"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flashcard-nav">
+                <button class="btn btn-danger" onclick="flashcardResult(false)">Didn't know it</button>
+                <button class="btn btn-success" onclick="flashcardResult(true)">I knew it</button>
+            </div>
+        </div>
+
+        <!-- Flashcard Results Screen -->
+        <div id="flashcard-results" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="results-card">
+                <h2 style="margin-bottom: 1.5rem;">Session Complete</h2>
+                <div class="results-score" id="flashcard-score">0%</div>
+                <div class="results-label">You knew <span id="flashcard-correct">0</span> of <span id="flashcard-total">0</span></div>
+                <div class="results-actions" style="margin-top: 2rem;">
+                    <button class="btn btn-secondary" id="flash-review-btn" onclick="showFlashcardReview()">Review cards</button>
+                    <button class="btn btn-secondary" onclick="showScreen('flashcard-setup')">Take a new set</button>
+                    <button class="btn btn-primary" onclick="showScreen('home-screen')">Back to modes</button>
+                </div>
+            </div>
+            <div id="flashcard-review-container" class="hidden" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Card Review</h3>
+                <div class="missed-questions-list" id="flashcard-review-list"></div>
+            </div>
+        </div>
+
+        <!-- Acronym Setup Screen -->
+        <div id="acronym-setup" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="setup-card">
+                <h2>Acronym Flashcards</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Master the official CompTIA CySA+ CS0-003 acronym list.</p>
+                <div class="form-group">
+                    <label>Number of cards</label>
+                    <input type="number" id="acronym-card-count" min="5" max="128" value="30">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="reverse-acronyms">
+                        <label for="reverse-acronyms" style="margin: 0;">Show the definition first (recall the acronym)</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="startAcronyms()">Start Studying</button>
+            </div>
+        </div>
+
+        <!-- Acronym Screen -->
+        <div id="acronym-screen" class="screen">
+            <a class="back-btn" onclick="showModal('acronym')">‹ End session</a>
+            <div class="flashcard-counter" id="acronym-counter">Card 1 of 30</div>
+            <div class="flashcard-container">
+                <div class="flashcard" id="acronym-card" onclick="flipAcronymCard()">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="flashcard-label" id="acronym-front-label">Acronym</div>
+                        <div class="acronym-term" id="acronym-front-term"></div>
+                        <div class="flashcard-hint">Tap the card or press Space to flip</div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="flashcard-label" id="acronym-back-label">Meaning</div>
+                        <div class="acronym-meaning" id="acronym-back-meaning"></div>
+                        <div class="acronym-definition" id="acronym-back-definition"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flashcard-nav">
+                <button class="btn btn-danger" onclick="acronymResult(false)">Didn't know it</button>
+                <button class="btn btn-success" onclick="acronymResult(true)">I knew it</button>
+            </div>
+        </div>
+
+        <!-- Acronym Results Screen -->
+        <div id="acronym-results" class="screen">
+            <a class="back-btn" onclick="showScreen('home-screen')">‹ Back to modes</a>
+            <div class="results-card">
+                <h2 style="margin-bottom: 1.5rem;">Session Complete</h2>
+                <div class="results-score" id="acronym-score">0%</div>
+                <div class="results-label">You knew <span id="acronym-correct">0</span> of <span id="acronym-total">0</span></div>
+                <div class="results-actions" style="margin-top: 2rem;">
+                    <button class="btn btn-secondary" id="acro-review-btn" onclick="showAcronymReview()">Review acronyms</button>
+                    <button class="btn btn-secondary" onclick="showScreen('acronym-setup')">Take a new set</button>
+                    <button class="btn btn-primary" onclick="showScreen('home-screen')">Back to modes</button>
+                </div>
+            </div>
+            <div id="acronym-review-container" class="hidden" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Acronym Review</h3>
+                <div class="missed-questions-list" id="acronym-review-list"></div>
+            </div>
+        </div>
     </div>
-    <script>location.replace('https://ez-exams.github.io/cysa/');</script>
-  </body>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <h3 id="modal-title">End session?</h3>
+            <p id="modal-message">Your progress will be lost.</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="hideModal()">Keep going</button>
+                <button class="btn btn-danger" id="modal-confirm" onclick="confirmModal()">End session</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/app.js"></script>
+    <footer class="ez-foot">Question pools are sourced from the <a href="https://www.examtopics.com/" target="_blank" rel="noopener noreferrer">ExamTopics</a> community dumps, with explanations drawn from the highest-voted discussion on each item.<br>EZ Exam is an independent study tool and is not affiliated with or endorsed by CompTIA or Microsoft.</footer>
+    <script>
+      (function () {
+        var nav = document.querySelector('.ez-nav');
+        if (!nav) return;
+        var btns = [].slice.call(nav.querySelectorAll('.ez-nav-btn'));
+        function activate(btn) {
+          btns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+        }
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var target = btn.dataset.go;
+            if (target === '__menu__') { showScreen('home-screen'); }
+            else { showScreen(target); }
+            activate(btn);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        });
+      })();
+    </script>
+</body>
 </html>
